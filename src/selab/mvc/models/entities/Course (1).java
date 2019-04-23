@@ -1,10 +1,8 @@
 package selab.mvc.models.entities;
 
-import selab.mvc.models.DataSet;
 import selab.mvc.models.Model;
+import sun.misc.Regexp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Course implements Model {
@@ -13,8 +11,6 @@ public class Course implements Model {
     private String startTime = null;
     private String endTime = null;
     private Weekday weekday;
-    private DataSet<Student> students = new DataSet<>();
-    private HashMap<String, Float> points = new HashMap<String, Float>();
 
 
     @Override
@@ -65,37 +61,13 @@ public class Course implements Model {
     }
 
     public float getAverage() {
-        float sum = 0;
-        ArrayList<Student> studentArrayList = students.getAll();
-        for (Student student : studentArrayList) {
-            sum += points.get(student.getStudentNo());
-        }
         // TODO: Calculate and return the average of the points
-        if (studentArrayList.size() == 0) {
-            return 0;
-        } else {
-            return (sum / studentArrayList.size());
-        }
-//        return 0;
+        return 0;
     }
 
     public String getStudents() {
-        String toRet = "";
-        ArrayList<Student> studentsArrayList = students.getAll();
-        for (Student student : studentsArrayList) {
-            if (toRet.equals("")) {
-                toRet = "" + student.getName();
-            } else {
-                toRet = toRet + ", " + student.getName();
-            }
-        }
         // TODO: Return a comma separated list of student names
-        return toRet;
-    }
-
-    public void addStudent(Student student, float points) {
-        students.add(student);
-        this.points.put(student.getStudentNo(), points);
+        return "-";
     }
 
     /**
