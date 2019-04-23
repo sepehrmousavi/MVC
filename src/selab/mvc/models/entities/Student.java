@@ -66,6 +66,12 @@ public class Student implements Model {
 //        average = getAverage();
     }
 
+    public void removeCourse(String key){
+        courses.remove(key);
+        this.points.remove(key, points);
+//        average = getAverage();
+    }
+
     /**
      *
      * @param studentNo Student number to be checeked

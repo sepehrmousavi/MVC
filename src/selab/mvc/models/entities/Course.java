@@ -98,6 +98,12 @@ public class Course implements Model {
         this.points.put(student.getStudentNo(), points);
     }
 
+    public void removeStudent(String key){
+        students.remove(key);
+        this.points.remove(key, points);
+//        average = getAverage();
+    }
+
     /**
      *
      * @param value The value to be validated as course number

@@ -11,15 +11,18 @@ import selab.mvc.views.View;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RemoveCourseController extends Controller {
 
     DataSet<Course> courses;
+    DataSet<Student> students;
     public RemoveCourseController(DataContext dataContext) {
         super(dataContext);
         courses = dataContext.getCourses();
+        students = dataContext.getStudents();
     }
 
     @Override
@@ -31,8 +34,15 @@ public class RemoveCourseController extends Controller {
         String courseNo = input.getString("courseNo");
 
         // TODO: Add codes for removing the course
+        courses.remove(courseNo);
+        ArrayList<Student> allStudents = students.getAll();
+        for (Student student : allStudents) {
+            student.removeCourse(courseNo);
+        }
 
-        return null;
+        Map<String, String> result = new HashMap<>();
+        result.put("success", "true");
+        return new JsonView(new JSONObject(result));
     }
 
     @Override

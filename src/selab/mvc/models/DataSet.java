@@ -1,7 +1,6 @@
 package selab.mvc.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class DataSet<T extends Model> {
@@ -13,6 +12,14 @@ public class DataSet<T extends Model> {
             throw new IllegalArgumentException("Duplicate primary key.");
 
         set.put(key, entity);
+    }
+
+    public void remove(String key) {
+
+        if (set.containsKey(key))
+            set.remove(key);
+
+//        set.put(key, entity);
     }
 
     public T get(String key) {
