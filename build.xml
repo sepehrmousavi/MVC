@@ -1,0 +1,41 @@
+<project name="MVC" basedir=".">
+    
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+
+	<path id="compile.classpath">
+        	<fileset dir="lib">
+            		<include name="*.jar"/>
+        	</fileset>
+  	</path>
+     
+ 
+	<target name="compile"  description="compile the source">
+        	<!-- Compile the java code from ${src} into ${build} -->
+        	<javac srcdir="${src}" destdir="build" classpathref="compile.classpath"/>
+    	</target>
+
+	<target name="make">
+		<mkdir dir="build/jar"/>
+		<jar destfile="build/jar/HelloWorld.jar" basedir="build">
+			<zipgroupfileset dir="lib" includes="*.jar"/>
+			<manifest>
+				<attribute name="Main-Class" value="Main"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run">
+        	<java jar="build/jar/HelloWorld.jar" fork="true"/>
+	</target>
+
+	<target name="checkstyle">
+	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpath="${basedir}/lib/checkstyle-8.19-all.jar"/>
+  		<checkstyle config="lib/checkstyle_checks.xml">
+    			<formatter type="xml" tofile="checkstyle_report.xml"/>
+    			<fileset dir="src" includes="**/*.java"/>
+  		</checkstyle>
+	</target>		
+	
+ 
+</project>
